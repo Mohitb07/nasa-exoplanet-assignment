@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Dropdown } from "../Dropdown";
 import { BASE_URL } from "../../api";
+import axios from "axios";
 
 type Option = {
   value: string;
@@ -17,24 +18,26 @@ export default function DiscoveryYear() {
 
   useEffect(() => {
     const getDiscoveryYearOptions = async () => {
-      const response = await fetch(
-        `${BASE_URL}select+distinct+disc_year+FROM+ps&format=json`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Allow-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      const data = await response.json();
-      const years = data.map((year: Year) => year.disc_year);
-      const options = years.map((year: string) => ({
-        value: year,
-        label: year,
-      }));
-      setOptions(options);
-      setIsLoading(false);
+      try {
+        const response = await axios.get(
+          `${BASE_URL}select+distinct+disc_year+FROM+ps&format=json`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const years = response.data.map((year: Year) => year.disc_year);
+        const options = years.map((year: string) => ({
+          value: year,
+          label: year,
+        }));
+        setOptions(options);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        console.log(error);
+      }
     };
     getDiscoveryYearOptions();
   }, []);

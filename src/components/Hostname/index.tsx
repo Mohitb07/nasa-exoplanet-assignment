@@ -1,21 +1,52 @@
+import { useEffect, useState } from "react";
+import { BASE_URL } from "../../api";
+import axios from "axios";
+
 import { Dropdown } from "../Dropdown";
 
+type Option = {
+  value: string;
+  label: string;
+};
+
+type Hostname = {
+  hostname: string;
+};
+
 export default function HostnameDropdown() {
-  const options = [
-    { value: "kepler", label: "Kepler" },
-    { value: "k2", label: "K2" },
-    { value: "corot", label: "CoRoT" },
-    { value: "kepler-confirmed", label: "Kepler Confirmed" },
-    { value: "k2-confirmed", label: "K2 Confirmed" },
-    { value: "k2-candidate", label: "K2 Candidate" },
-    { value: "tess", label: "TESS" },
-    { value: "tess-confirmed", label: "TESS Confirmed" },
-  ];
+  const [options, setOptions] = useState<Option[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getHostnameOptions = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}select+distinct+hostname+FROM+ps&format=json`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const hostnames = response.data.map((year: Hostname) => year.hostname);
+        const options = hostnames.map((hostname: string) => ({
+          value: hostname,
+          label: hostname,
+        }));
+        setOptions(options);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        console.log(error);
+      }
+    };
+    getHostnameOptions();
+  }, []);
   return (
     <Dropdown
       options={options}
       values={[]}
-      loading={false}
+      loading={isLoading}
       placeholder="Hostname"
     />
   );
