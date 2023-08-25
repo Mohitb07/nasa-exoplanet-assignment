@@ -1,46 +1,20 @@
-import { useState, useEffect } from "react";
+import { usePlanetDataContext } from "../../hooks/useData";
 import { Dropdown } from "../Dropdown";
-import { BASE_URL } from "../../api";
-import axios from "axios";
-
-type Option = {
-  value: string;
-  label: string;
-};
-
-type Year = {
-  disc_year: string;
-};
 
 export default function DiscoveryYear() {
-  const [options, setOptions] = useState<Option[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { isLoading, parsedData, handleSearchQuery } = usePlanetDataContext();
 
-  useEffect(() => {
-    const getDiscoveryYearOptions = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}select+distinct+disc_year+FROM+ps&format=json`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const years = response.data.map((year: Year) => year.disc_year);
-        const options = years.map((year: string) => ({
-          value: year,
-          label: year,
-        }));
-        setOptions(options);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.log(error);
-      }
+  const discoveryYearColumn = parsedData.map((row) => row[3]);
+  const slicedDiscoveryYearColumn = discoveryYearColumn.slice(1);
+  const uniqueDiscoveryyear = new Set(slicedDiscoveryYearColumn);
+  const uniqueDiscoveryyearArray = Array.from(uniqueDiscoveryyear);
+
+  const options = uniqueDiscoveryyearArray.map((year) => {
+    return {
+      value: year,
+      label: year,
     };
-    getDiscoveryYearOptions();
-  }, []);
+  });
 
   return (
     <Dropdown
@@ -48,6 +22,12 @@ export default function DiscoveryYear() {
       values={[]}
       loading={isLoading}
       placeholder="Discovery Year"
+      onChange={(value) => {
+        handleSearchQuery &&
+          handleSearchQuery({
+            discoveryYear: value.value,
+          });
+      }}
     />
   );
 }
