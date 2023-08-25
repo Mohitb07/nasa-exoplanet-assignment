@@ -6,6 +6,7 @@ interface DropdownProps {
   values: { value: string; label: string }[];
   loading?: boolean;
   placeholder?: string;
+  onChange?: (value: { value: string; label: string }) => void;
 }
 
 export const Dropdown = ({
@@ -13,6 +14,7 @@ export const Dropdown = ({
   values,
   loading,
   placeholder,
+  onChange,
 }: DropdownProps) => {
   const customDropdownRenderer = ({
     methods,
@@ -20,7 +22,7 @@ export const Dropdown = ({
     const items = options.filter(
       (option) => !values.find((value) => value.value === option.value)?.value
     );
-    const rowHeight = 40;
+    const rowHeight = 60;
     const totalHeight = items.length * rowHeight;
 
     return (
@@ -35,7 +37,7 @@ export const Dropdown = ({
               width={width - 2}
               rowRenderer={({ index, style, key }) => (
                 <div
-                  className="w-auto h-full flex items-center justify-start px-4 cursor-pointer hover:bg-gray-100"
+                  className="w-auto h-full text-sm flex items-center justify-start px-4 cursor-pointer hover:bg-gray-100"
                   key={key}
                   style={style}
                   onClick={() => methods.addItem(items[index])}
@@ -61,7 +63,9 @@ export const Dropdown = ({
         values={values}
         loading={loading}
         placeholder={placeholder}
-        onChange={(value) => console.log(value)}
+        onChange={(value) => {
+          onChange && onChange(value[0]);
+        }}
       />
     </div>
   );
