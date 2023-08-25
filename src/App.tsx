@@ -1,10 +1,13 @@
+import { PlanetDataProvider } from "./context/PlanetData";
 import Homepage from "./pages";
 
 function App() {
   return (
     <>
       <div>
-        <Homepage/>
+        <PlanetDataProvider>
+          <Homepage />
+        </PlanetDataProvider>
       </div>
     </>
   );
