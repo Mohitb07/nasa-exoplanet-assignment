@@ -16,13 +16,14 @@ export const Dropdown = ({
   placeholder,
   onChange,
 }: DropdownProps) => {
+  
   const customDropdownRenderer = ({
     methods,
   }: SelectRenderer<{ value: string; label: string }>) => {
     const items = options.filter(
       (option) => !values.find((value) => value.value === option.value)?.value
     );
-    const rowHeight = 60;
+    const rowHeight = 58;
     const totalHeight = items.length * rowHeight;
 
     return (
@@ -58,6 +59,7 @@ export const Dropdown = ({
         style={{
           borderRadius: "10px",
           padding: "10px",
+          fontSize: "14px",
         }}
         options={options}
         values={values}
