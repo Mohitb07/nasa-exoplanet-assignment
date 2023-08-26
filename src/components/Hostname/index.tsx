@@ -1,8 +1,11 @@
+import { useMemo } from "react";
+
 import { usePlanetDataContext } from "../../hooks/useData";
 import { Dropdown } from "../Dropdown";
 
 export default function HostnameDropdown() {
-  const { isLoading, parsedData, handleSearchQuery } = usePlanetDataContext();
+  const { isLoading, parsedData, handleSearchQuery, searchQuery } =
+    usePlanetDataContext();
 
   const hostnameColumn = parsedData.map((row) => row[1]);
   const slicedHostnameColumn = hostnameColumn.slice(1);
@@ -16,18 +19,35 @@ export default function HostnameDropdown() {
     };
   });
 
+  const memoizedOptions = useMemo(() => {
+    return options;
+  }, [options]);
+
+  let initialValues: { value: string; label: string }[] = [];
+  if (searchQuery?.hostname) {
+    initialValues = [
+      {
+        value: searchQuery.hostname,
+        label: searchQuery.hostname,
+      },
+    ];
+  }
+
+  const handleOnChange = (value: { value: string; label: string }) => {
+    handleSearchQuery &&
+      value &&
+      handleSearchQuery({
+        hostname: value.value,
+      });
+  };
+
   return (
     <Dropdown
-      options={options}
-      values={[]}
+      options={memoizedOptions}
+      values={initialValues}
       loading={isLoading}
       placeholder="Hostname"
-      onChange={(value) => {
-        handleSearchQuery &&
-          handleSearchQuery({
-            hostname: value.value,
-          });
-      }}
+      onChange={handleOnChange}
     />
   );
 }

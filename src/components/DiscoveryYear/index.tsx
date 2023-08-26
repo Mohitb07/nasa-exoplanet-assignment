@@ -2,7 +2,8 @@ import { usePlanetDataContext } from "../../hooks/useData";
 import { Dropdown } from "../Dropdown";
 
 export default function DiscoveryYear() {
-  const { isLoading, parsedData, handleSearchQuery } = usePlanetDataContext();
+  const { isLoading, parsedData, handleSearchQuery, searchQuery } =
+    usePlanetDataContext();
 
   const discoveryYearColumn = parsedData.map((row) => row[3]);
   const slicedDiscoveryYearColumn = discoveryYearColumn.slice(1);
@@ -16,18 +17,28 @@ export default function DiscoveryYear() {
     };
   });
 
+  let values: { value: string; label: string }[] = [];
+  if (searchQuery?.discoveryYear) {
+    values = [
+      { value: searchQuery.discoveryYear, label: searchQuery.discoveryYear },
+    ];
+  }
+
+  const handleOnChange = (value: { value: string; label: string }) => {
+    handleSearchQuery &&
+      value &&
+      handleSearchQuery({
+        discoveryYear: value.value,
+      });
+  };
+
   return (
     <Dropdown
       options={options}
-      values={[]}
+      values={values}
       loading={isLoading}
       placeholder="Discovery Year"
-      onChange={(value) => {
-        handleSearchQuery &&
-          handleSearchQuery({
-            discoveryYear: value.value,
-          });
-      }}
+      onChange={handleOnChange}
     />
   );
 }

@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { Planet, SearchQuery } from "../context/PlanetData";
 import { usePlanetDataContext } from "./useData";
+import toast from "react-hot-toast";
 
 export const useSearch = () => {
-  const { parsedData } = usePlanetDataContext();
+  const { parsedData, handleSearchQuery } = usePlanetDataContext();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<Planet[]>([]);
 
   const handleSearch = (searchQuery: SearchQuery) => {
+    if (
+      searchQuery.hostname === "" &&
+      searchQuery.discoveryMethod === "" &&
+      searchQuery.discoveryYear === "" &&
+      searchQuery.discoveryFacility === ""
+    ) {
+      console.log('inside', searchQuery)
+      return toast.error("You must select something");
+    }
     setIsSearching(true);
     const filteredData = parsedData.filter((row) => {
       return Object.entries(searchQuery).every(([key, value]) => {
@@ -26,7 +36,6 @@ export const useSearch = () => {
         return true;
       });
     });
-    // console.log("filteredData", filteredData);
     setSearchResult(filteredData);
     setIsSearching(false);
   };
@@ -49,11 +58,23 @@ export const useSearch = () => {
     setIsSearching(false);
   };
 
+  const handleFormReset = () => {
+    setSearchResult([]);
+    handleSearchQuery &&
+      handleSearchQuery({
+        hostname: "",
+        discoveryMethod: "",
+        discoveryYear: "",
+        discoveryFacility: "",
+      });
+  };
+
   return {
     searchResult,
     handleSearch,
     isSearching,
     handleDecreasingOrder,
     handleIncreasingOrder,
+    handleFormReset,
   };
 };

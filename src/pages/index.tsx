@@ -5,6 +5,7 @@ import HostnameDropdown from "../components/Hostname";
 import Table from "../components/Table";
 import { usePlanetDataContext } from "../hooks/useData";
 import { useSearch } from "../hooks/useSearch";
+import { Toaster } from 'react-hot-toast';
 
 // flex flex-col md:flex-wrap md:flex-row lg:flex-nowrap
 
@@ -16,6 +17,7 @@ const Homepage = () => {
     handleSearch,
     handleDecreasingOrder,
     handleIncreasingOrder,
+    handleFormReset,
   } = useSearch();
   console.log("homepage render");
   const handleSearchClick = () => {
@@ -39,7 +41,7 @@ const Homepage = () => {
             >
               Search
             </button>
-            <button className="bg-blue-700 px-5 rounded-xl py-2 w-full text-white">
+            <button onClick={handleFormReset} className="bg-blue-700 px-5 rounded-xl py-2 w-full text-white">
               Clear
             </button>
           </div>
@@ -53,6 +55,7 @@ const Homepage = () => {
           />
         </div>
       </div>
+      <Toaster position="bottom-center"/>
     </div>
   );
 };
