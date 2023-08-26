@@ -245,7 +245,9 @@ const Table = ({
         <tbody>
           {searchResult.map((planet) => (
             <tr key={planet[0]} className="text-center">
-              <td className="border px-4 py-2">{planet[0]}</td>
+              <td className="border px-4 py-2 text-blue-400">
+                <a target="_blank" referrerPolicy="no-referrer" href={`https://exoplanetarchive.ipac.caltech.edu/overview/${planet[0]}`}>{planet[0]}</a>
+              </td>
               <td className="border px-4 py-2">{planet[1]}</td>
               <td className="border px-4 py-2">{planet[2]}</td>
               <td className="border px-4 py-2">{planet[3]}</td>
