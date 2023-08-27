@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { Planet, SearchQuery } from "../context/PlanetData";
-import { usePlanetDataContext } from "./useData";
+import { useState, useCallback } from "react";
 import toast from "react-hot-toast";
 
+import { usePlanetDataContext } from "./useData";
+import { Planet } from "../types";
+
 export const useSearch = () => {
-  const { parsedData, handleSearchQuery } = usePlanetDataContext();
+  const { parsedData, handleSearchQuery, searchQuery } = usePlanetDataContext();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResult, setSearchResult] = useState<Planet[]>([]);
 
-  const handleSearch = (searchQuery: SearchQuery) => {
+  const handleSearch = () => {
     if (
       searchQuery.hostname === "" &&
       searchQuery.discoveryMethod === "" &&
       searchQuery.discoveryYear === "" &&
       searchQuery.discoveryFacility === ""
     ) {
-      console.log('inside', searchQuery)
       return toast.error("You must select something");
     }
     setIsSearching(true);
@@ -40,23 +40,29 @@ export const useSearch = () => {
     setIsSearching(false);
   };
 
-  const handleDecreasingOrder = (columnIndex: number) => {
-    setIsSearching(true);
-    const sortedData = [...searchResult].sort((a, b) => {
-      return b[columnIndex].localeCompare(a[columnIndex]);
-    });
-    setSearchResult(sortedData);
-    setIsSearching(false);
-  };
+  const handleDecreasingOrder = useCallback(
+    (columnIndex: number) => {
+      setIsSearching(true);
+      const sortedData = [...searchResult].sort((a, b) => {
+        return b[columnIndex].localeCompare(a[columnIndex]);
+      });
+      setSearchResult(sortedData);
+      setIsSearching(false);
+    },
+    [searchResult]
+  );
 
-  const handleIncreasingOrder = (columnIndex: number) => {
-    setIsSearching(true);
-    const sortedData = [...searchResult].sort((a, b) => {
-      return a[columnIndex].localeCompare(b[columnIndex]);
-    });
-    setSearchResult(sortedData);
-    setIsSearching(false);
-  };
+  const handleIncreasingOrder = useCallback(
+    (columnIndex: number) => {
+      setIsSearching(true);
+      const sortedData = [...searchResult].sort((a, b) => {
+        return a[columnIndex].localeCompare(b[columnIndex]);
+      });
+      setSearchResult(sortedData);
+      setIsSearching(false);
+    },
+    [searchResult]
+  );
 
   const handleFormReset = () => {
     setSearchResult([]);
