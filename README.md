@@ -1,27 +1,62 @@
-# React + TypeScript + Vite
+# Exo Planet Archive 🧋
+A platform that provides easy access to the wealth of information available in NASA's Exoplanet Archive. This platform is designed to help researchers, space enthusiasts, and curious minds explore the fascinating world of exoplanets - planets that orbit stars beyond our solar system.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![image](https://github.com/Mohitb07/nasa-exoplanet-assignment/assets/51907464/aecd97ff-622d-4791-b06a-be8b6d4f7975)
 
-Currently, two official plugins are available:
+![image](https://github.com/Mohitb07/nasa-exoplanet-assignment/assets/51907464/45fcf479-4951-4153-976d-749d76ccddb1)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run Locally
 
-## Expanding the ESLint configuration
+Clone the project
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+  git clone https://github.com/Mohitb07/nasa-exoplanet-assignment.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Go to the project directory
+
+```bash
+  cd nasa-exoplanet-assignment
+```
+
+Install dependencies (Note: in order to install with npm first delete yarn.lock file)
+
+```bash
+  npm install or yarn
+```
+
+Start the server
+
+```bash
+  npm run dev or yarn run dev
+```
+
+Run Tests
+
+```bash
+  npm run test or yarn test
+```
+Build the project
+
+```bash
+  npm run build or yarn build
+```
+Run build project
+
+```bash
+  npm run preview or yarn preview
+```
+
+## Tech Stack
+
+**Client:** TypeScript, Vite, React JS, Tailwind CSS, PapaParse, React-dropdown-select, React Virtualized
+
+**Hosting**: Netlify
+
+## Contributing
+
+Contributions are always welcome!
+
+## Feedback
+
+If you have any feedback, please reach out to me at bmohit980@gmail.com
