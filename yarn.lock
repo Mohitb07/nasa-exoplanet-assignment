@@ -471,7 +471,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.5.3.tgz#fa52c147f405d56b2f1dd8780d840aa87ddff629"
   integrity sha512-ITI7rbWczR8a/S6qjAW7DMqxqFMjjTo61qZVWJ1ubPvbIQsL5D/TvwjYEalM8Kthpe3hTzOGrF2TGbAu2uyqeA==
 
-"@types/papaparse@^5.3.1", "@types/papaparse@^5.3.8":
+"@types/papaparse@^5.3.8":
   version "5.3.8"
   resolved "https://registry.yarnpkg.com/@types/papaparse/-/papaparse-5.3.8.tgz#6b4b5156183987b4d1816fec45bbc6aad40e337e"
   integrity sha512-ArKIEOOWULbhi53wkAiRy1ze4wvrTfhpAj7Yfzva+EkmX2sV8PpFB+xqzJfzXNzK4me95FJH9QZt5NXFVGzOoQ==
@@ -1495,7 +1495,7 @@ p-locate@^5.0.0:
   dependencies:
     p-limit "^3.0.2"
 
-papaparse@^5.3.1, papaparse@^5.4.1:
+papaparse@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.4.1.tgz#f45c0f871853578bd3a30f92d96fdcfb6ebea127"
   integrity sha512-HipMsgJkZu8br23pW15uvo6sib6wne/4woLZPlFf3rpDyMe9ywEXUsuD7+6K9PRkJlVT51j/sCOYDKGGS3ZJrw==
@@ -1671,14 +1671,6 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
-
-react-papaparse@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/react-papaparse/-/react-papaparse-4.1.0.tgz#09e1cdae55a0f3e36650aaf7ff9bb5ee2aed164a"
-  integrity sha512-sGJqK+OE2rVVQPxQUCCDW2prLIglv9kTdizhNe2awXvKo0gLShmhpRN3BwA+ujw5M2gSJ/KGNEwtgII0OsLgkg==
-  dependencies:
-    "@types/papaparse" "^5.3.1"
-    papaparse "^5.3.1"
 
 react-virtualized@^9.22.5:
   version "9.22.5"
