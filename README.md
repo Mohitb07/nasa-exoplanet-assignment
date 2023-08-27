@@ -1,6 +1,8 @@
 # Exo Planet Archive 🧋
 A platform that provides easy access to the wealth of information available in NASA's Exoplanet Archive. This platform is designed to help researchers, space enthusiasts, and curious minds explore the fascinating world of exoplanets - planets that orbit stars beyond our solar system.
 
+## Live at: https://exo-planet-archive.netlify.app/
+
 ![image](https://github.com/Mohitb07/nasa-exoplanet-assignment/assets/51907464/aecd97ff-622d-4791-b06a-be8b6d4f7975)
 
 ![image](https://github.com/Mohitb07/nasa-exoplanet-assignment/assets/51907464/45fcf479-4951-4153-976d-749d76ccddb1)
