@@ -1,18 +1,20 @@
 import Papa from "papaparse";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
-export type Query = {
+import { Planet, SearchQuery } from "../types";
+
+type Query = {
   [key in keyof SearchQuery]?: string;
 };
 
-export type PlanetData = {
+type PlanetData = {
   parsedData: Planet[] | [];
   isLoading: boolean;
   searchQuery: SearchQuery;
   handleSearchQuery?: (searchQuery: Query) => void;
 };
 
-export const PlanetDataInitialValue: PlanetData = {
+const PlanetDataInitialValue: PlanetData = {
   parsedData: [],
   isLoading: true,
   searchQuery: {
@@ -27,22 +29,12 @@ export const PlanetDataContext = createContext<PlanetData>(
   PlanetDataInitialValue
 );
 
-export type Planet = [string, string, string, string, string];
-
-export type SearchQuery = {
-  hostname: string;
-  discoveryMethod: string;
-  discoveryYear: string;
-  discoveryFacility: string;
-};
-
 export const PlanetDataProvider = ({ children }: { children: ReactNode }) => {
   const [data, setParsedData] = useState<PlanetData>({
     isLoading: PlanetDataInitialValue.isLoading,
     parsedData: PlanetDataInitialValue.parsedData,
     searchQuery: PlanetDataInitialValue.searchQuery,
   });
-  // useSearch(data.searchQuery);
 
   const handleSearchQuery = (query: Query) => {
     setParsedData({
@@ -63,7 +55,6 @@ export const PlanetDataProvider = ({ children }: { children: ReactNode }) => {
         Papa.parse(data, {
           complete: (result) => {
             const csvData = result.data as Planet[];
-            console.log("result", csvData);
             setParsedData((prev) => ({
               ...prev,
               parsedData: csvData,
