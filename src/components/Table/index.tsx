@@ -1,4 +1,6 @@
-import { Planet } from "../../context/PlanetData";
+import { memo } from "react";
+
+import { Planet } from "../../types";
 
 type TableProps = {
   searchResult: Planet[];
@@ -246,7 +248,14 @@ const Table = ({
           {searchResult.map((planet) => (
             <tr key={planet[0]} className="text-center">
               <td className="border px-4 py-2 text-blue-400">
-                <a target="_blank" referrerPolicy="no-referrer" href={`https://exoplanetarchive.ipac.caltech.edu/overview/${planet[0]}`}>{planet[0]}</a>
+                <a
+                  target="_blank"
+                  referrerPolicy="no-referrer"
+                  rel="noreferrer"
+                  href={`https://exoplanetarchive.ipac.caltech.edu/overview/${planet[0]}`}
+                >
+                  {planet[0]}
+                </a>
               </td>
               <td className="border px-4 py-2">{planet[1]}</td>
               <td className="border px-4 py-2">{planet[2]}</td>
@@ -259,4 +268,5 @@ const Table = ({
     </div>
   );
 };
-export default Table;
+const MemoizedTable = memo(Table);
+export default MemoizedTable;
