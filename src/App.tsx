@@ -4,11 +4,9 @@ import Homepage from "./pages";
 function App() {
   return (
     <>
-      <div>
-        <PlanetDataProvider>
-          <Homepage />
-        </PlanetDataProvider>
-      </div>
+      <PlanetDataProvider>
+        <Homepage />
+      </PlanetDataProvider>
     </>
   );
 }
