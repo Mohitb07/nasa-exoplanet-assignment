@@ -6,8 +6,14 @@ interface DropdownProps {
   values: { value: string; label: string }[];
   loading?: boolean;
   placeholder?: string;
-  onChange?: (value: { value: string; label: string }) => void;
+  onChange: (value: { value: string; label: string }) => void;
 }
+
+const DropdownStyle = {
+  borderRadius: "10px",
+  padding: "10px",
+  fontSize: "14px",
+};
 
 export const Dropdown = ({
   options,
@@ -16,7 +22,6 @@ export const Dropdown = ({
   placeholder,
   onChange,
 }: DropdownProps) => {
-  
   const customDropdownRenderer = ({
     methods,
   }: SelectRenderer<{ value: string; label: string }>) => {
@@ -27,11 +32,10 @@ export const Dropdown = ({
     const totalHeight = items.length * rowHeight;
 
     return (
-      <div className="">
+      <div>
         <AutoSizer disableHeight>
           {({ width }: { width: number }) => (
             <List
-              className=""
               height={totalHeight}
               rowCount={items.length}
               rowHeight={rowHeight}
@@ -56,18 +60,13 @@ export const Dropdown = ({
     <div className="w-full rounded-full">
       <Select
         dropdownRenderer={customDropdownRenderer}
-        style={{
-          borderRadius: "10px",
-          padding: "10px",
-          fontSize: "14px",
-        }}
+        style={DropdownStyle}
+        searchable={false}
         options={options}
         values={values}
         loading={loading}
         placeholder={placeholder}
-        onChange={(value) => {
-          onChange && onChange(value[0]);
-        }}
+        onChange={(value) => onChange(value[0])}
       />
     </div>
   );
